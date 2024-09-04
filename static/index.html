@@ -12,20 +12,24 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dosis:wght@200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     
     <style>
       :root {
         --bs-body-bg: white;
       }
 
-      h1 {
-        font-family: "Caveat", cursive;
+      body {
+        font-family: "Open Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+        font-weight: 500;
       }
 
-      #inputMessage {
-        font-family: "Dosis", sans-serif;
-        font-weight: 500;
+      h1 {
+        font-family: "Comfortaa", cursive;
+        color: #051b2e;
+        margin-bottom: 30px;
       }
 
       .message {
@@ -33,19 +37,16 @@
         border-radius: 15px;
         padding: 10px;
         padding-left: 20px;
-        font-family: "Dosis", sans-serif;
-        font-weight: 500;
-        font-size: large;
       }
 
       .human-message {
-        background-color: #e1ceff;
-        color: #220057;
+        background-color: #c4e3ff;
+        color: #051b2e;
       }
 
       .ai-message {
-        background-color: #f6f1ff;
-        color: #220057;
+        background-color: #f2f9ff;
+        color: #051b2e;
       }
     </style>
   </head>
@@ -115,8 +116,7 @@
         inputMessage.disabled = true;
         inputMessage.value = "";
 
-        // const response = await fetch("https://castores-be-je5nqtjnia-uc.a.run.app", {
-        const response = await fetch("http://localhost:8081", {
+        const response = await fetch("http://localhost:8080", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
