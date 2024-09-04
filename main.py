@@ -39,24 +39,20 @@ def create_app():
             MessagesPlaceholder(variable_name="messages"),
         ]
     )
-
     chain = prompt | llm_with_tools
-
+    
     history = ChatMessageHistory()
 
     @app.route("/", methods=['POST'])
     def talkToGemini():
         user_message = request.json['message']
         history.add_user_message(user_message)
-        print("> USER")
-        print("> " + user_message)
+        print(history.messages[-1])
 
         ai_response = chain.invoke({"messages": history.messages})
 
         history.add_ai_message(ai_response)
-        print("> AI")
-        print("> " + ai_response.content)
-        print("> " + str(ai_response.tool_calls))
+        print(history.messages[-1])
 
         if len(ai_response.tool_calls) == 0:
             return ai_response.content
@@ -64,15 +60,12 @@ def create_app():
         for tool_call in ai_response.tool_calls:
             selected_tool = tools_dict[tool_call["name"].lower()]
             tool_output = selected_tool.invoke(tool_call["args"])
-            tool_message = ToolMessage(tool_output, tool_call_id=tool_call["id"])
-            history.add_message(tool_message)
-            print("> TOOL")
-            print("> " + str(tool_message))
+            history.add_message(ToolMessage(tool_output, tool_call_id=tool_call["id"]))
+            print(history.messages[-1])
 
         ai_response = chain.invoke({"messages": history.messages})
         history.add_ai_message(ai_response.content)
-        print("> AI")
-        print("> " + ai_response.content)
+        print(history.messages[-1])
 
         return ai_response.content
 
