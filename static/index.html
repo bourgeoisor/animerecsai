@@ -4,59 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AnimeRecsAI</title>
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico?v=1">
 
-    <link href="/static/fontawesome/css/fontawesome.css" rel="stylesheet" />
-    <link href="/static/fontawesome/css/solid.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     
-    <style>
-      :root {
-        --bs-body-bg: white;
-      }
-
-      body {
-        font-family: "Open Sans", sans-serif;
-        font-optical-sizing: auto;
-        font-style: normal;
-        font-weight: 500;
-      }
-
-      h1 {
-        font-family: "Comfortaa", cursive;
-        color: #051b2e;
-        margin-bottom: 30px;
-      }
-
-      .message {
-        margin-top: 15px;
-        border-radius: 15px;
-        padding: 10px;
-        padding-left: 20px;
-      }
-
-      .human-message {
-        background-color: #c4e3ff;
-        color: #051b2e;
-      }
-
-      .ai-message {
-        background-color: #f2f9ff;
-        color: #051b2e;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <header>
-      <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-          <span class="navbar-brand mb-0 h1"><i class="fa-solid fa-star-shooting"></i> AnimeRecsAI</span>
-        </div>
-      </nav>
     </header>
     
     <main>
@@ -79,66 +37,9 @@
     </main>
 
     <footer>
-
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-      const sendButton = document.getElementById("sendButton");
-      const inputMessage = document.getElementById("inputMessage");
-      const messagesDiv = document.getElementById("messages");
-
-      async function main() {
-        sendButton.addEventListener("click", handleButtonClick);
-        inputMessage.addEventListener("keypress", (event) => {
-          if (event.key === "Enter") {
-            sendButton.click();
-          }
-        });
-        inputMessage.focus();
-      }
-
-      async function handleButtonClick() {
-        if (!inputMessage.value || !inputMessage.value.trim()) {
-          return;
-        }
-
-        const message = inputMessage.value;
-        message.value = "";
-        console.log("USER: " + message)
-
-        const humanMessageDiv = document.createElement("div");
-        humanMessageDiv.classList.add("message", "human-message");
-        humanMessageDiv.innerText = message;
-        messagesDiv.appendChild(humanMessageDiv);
-
-        sendButton.disabled = true;
-        inputMessage.disabled = true;
-        inputMessage.value = "";
-
-        const response = await fetch("http://localhost:8080", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            message: message
-          }),
-        });
-        const responseText = (await response.text()).trim();
-        console.log("AI: " + responseText)
-
-        const AIMessageDiv = document.createElement("div");
-        AIMessageDiv.classList.add("message", "ai-message");
-        AIMessageDiv.innerText = responseText;
-        messagesDiv.appendChild(AIMessageDiv);
-
-        sendButton.disabled = false;
-        inputMessage.disabled = false;
-        inputMessage.focus();
-      }
-
-      main();
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>

@@ -1,0 +1,48 @@
+:root {
+    --bs-body-bg: white;
+  }
+
+  body {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  main {
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+
+  h1 {
+    font-family: "Comfortaa", cursive;
+    color: #051b2e;
+    margin-bottom: 30px;
+  }
+
+  .message {
+    margin-top: 15px;
+    border-radius: 15px;
+    padding: 10px;
+    padding-left: 20px;
+    min-height: 40px;
+  }
+
+  .human-message {
+    background-color: #c4e3ff;
+    color: #051b2e;
+  }
+
+  .ai-message {
+    background-color: #f2f9ff;
+    color: #051b2e;
+  }
+
+  .ai-message-loading {
+    -webkit-mask:linear-gradient(-60deg,#000 30%,#0005,#000 70%) right/300% 100%;
+    animation: shimmer 1s infinite;
+  }
+
+  @keyframes shimmer {
+    100% {-webkit-mask-position:left}
+  }
