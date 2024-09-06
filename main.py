@@ -6,14 +6,15 @@ from langchain_core.messages import ToolMessage
 from flask import Flask, request, send_from_directory
 import requests
 
-genres = "action: 1, adult cast: 50, adventure: 2, anthropomorphic: 51, avant garde: 5, boys love: 28, childcare: 53, combat sports: 54, comedy: 4, \
-delinquents: 55, detective: 39, drama: 8, educational: 56, fantasy: 10, gag humor: 57, girls love: 26, gore: 58, gourmet: 47, \
-harem: 35, high stakes game: 59, historical: 13, horror: 14, idols (female): 60, idols (male): 61, isekai: 62, iyashikei: 63, josei: 43, \
-kids: 15, love polygon: 64, mahou shoujo: 66, martial arts: 17, mecha: 18, medical: 67, military: 38, music: 19, mystery: 7, mythology: 6, \
-organized crime: 68, otaku culture: 69, parody: 20, performing arts: 70, pets: 71, psychological: 40, racing: 3, reincarnation: 72, reverse harem: 73, \
-romance: 22, romantic subtext: 74, samurai: 21, school: 23, sci-fi: 24, seinen: 42, shoujo: 25, shounen: 27, showbiz: 75, slice of life: 36, space: 29, \
-sports: 30, strategy game: 11, super power: 31, supernatural: 37, survival: 76, suspense: 41, team sports: 77, time travel: 78, vampire: 32, \
-video game: 79, visual arts: 80, workplace: 48"
+genres = "action: 1, adult cast: 50, adventure: 2, anthropomorphic: 51, avant garde: 5, childcare: 53, \
+combat sports: 54, comedy: 4, delinquents: 55, detective: 39, drama: 8, educational: 56, fantasy: 10, gag humor: 57, \
+gore: 58, gourmet: 47, high stakes game: 59, historical: 13, horror: 14, idols (female): 60, idols (male): 61, \
+isekai: 62, iyashikei: 63, josei: 43, kids: 15, love polygon: 64, mahou shoujo: 66, martial arts: 17, mecha: 18, \
+medical: 67, military: 38, music: 19, mystery: 7, mythology: 6, organized crime: 68, otaku culture: 69, parody: 20, \
+performing arts: 70, pets: 71, psychological: 40, racing: 3, reincarnation: 72, romance: 22, romantic subtext: 74, \
+samurai: 21, school: 23, sci-fi: 24, seinen: 42, shoujo: 25, shounen: 27, showbiz: 75, slice of life: 36, space: 29, \
+sports: 30, strategy game: 11, super power: 31, supernatural: 37, survival: 76, suspense: 41, team sports: 77, \
+time travel: 78, vampire: 32, video game: 79, visual arts: 80, workplace: 48"
 
 def jikan_api(params: dict) -> str:
     base_url = "https://api.jikan.moe/v4/anime"
@@ -131,7 +132,6 @@ def create_app():
         print(history.messages[-1])
 
         ai_response = chain.invoke({"messages": history.messages})
-
         history.add_ai_message(ai_response)
         print(history.messages[-1])
 
@@ -153,6 +153,5 @@ def create_app():
     return app
 
 if __name__ == "__main__":
-    print("Initializing, please wait...")
     app = create_app()
     app.run(host='0.0.0.0', port=8080)
